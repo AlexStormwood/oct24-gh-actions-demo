@@ -7,6 +7,12 @@ on:
     branches:
       - master
       - main
+  workflow_dispatch:
+    inputs:
+      pokemon:
+        description: "Pokemon to show an image of"
+        required: true
+        default: "pikachu"
 
 # Define the things to do within the workflow
 jobs:
@@ -39,3 +45,12 @@ jobs:
         run: |
           ls .
           echo "All files of pwd listed above, enjoy!"
+
+  pokemonimagejob:
+    needs: [ourfirstjob, oursecondjob]
+    name: Add Pokemon Image To Readme
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ibrahiem96/poke-readme-action@main
+        with:
+          pokemon: ${{ inputs.pokemon || 'pikachu' }}
