@@ -17,6 +17,9 @@ jobs:
     # Steps are the specific things to do!
     steps:
       - run: echo "Hello, world!"
+
+      - uses: actions/checkout@v4
+
       - run: |
           ls .
           echo "All files of pwd listed above, enjoy!"
@@ -26,7 +29,13 @@ jobs:
     runs-on: windows-latest
     # Steps are the specific things to do!
     steps:
-      - run: echo "Hello, world!"
-      - run: |
+      - name: Hello world command
+        run: echo "Hello, world!"
+
+      - name: Get a copy of the repo files
+        uses: actions/checkout@v4
+
+      - name: Run multiple commands 
+        run: |
           ls .
           echo "All files of pwd listed above, enjoy!"
